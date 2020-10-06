@@ -1,0 +1,33 @@
+﻿@page "/signin"
+
+<div class="sign-form">
+    <p class="welcome-text">Hello @(string.IsNullOrEmpty(Username) ? "User" : Username) - Today is @Day!</p>
+
+    <EditForm>
+        <input type="text" class="sign-input form-control" placeholder="Username" @bind-value="Username" />
+        @*<ValidationInput @bind-Value="@Username"></ValidationInput>*@
+        <input type="password" class="sign-input form-control" placeholder="Password" />
+
+        <button class="sign-button btn btn-primary" type="submit">Sign in</button>
+    </EditForm>
+    <div class="signup">
+        <a href="/signup">Sign up</a>
+
+    </div>
+</div>
+
+@code {
+    private string Day { get; } = DateTime.Now.DayOfWeek.ToString();
+
+    private string Username { get; set; } = "Boyet";
+
+    private void HandleUserNameChanged(ChangeEventArgs eventArgs)
+    {
+        Username = eventArgs.Value.ToString();
+    }
+
+    private void HandleUserNameValueChanged(string value)
+    {
+        Username = value;
+    }
+}
