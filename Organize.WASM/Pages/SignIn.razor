@@ -1,33 +1,35 @@
 ﻿@page "/signin"
+@inherits SignInBase
 
 <div class="sign-form">
-    <p class="welcome-text">Hello @(string.IsNullOrEmpty(Username) ? "User" : Username) - Today is @Day!</p>
+    <p class="welcome-text">Hello @(string.IsNullOrEmpty(User.UserName) ? "User" : User.UserName) - Today is @Day!</p>
 
-    <EditForm>
-        <input type="text" class="sign-input form-control" placeholder="Username" @bind-value="Username" />
-        @*<ValidationInput @bind-Value="@Username"></ValidationInput>*@
-        <input type="password" class="sign-input form-control" placeholder="Password" />
-
+    <EditForm EditContext="EditContext" OnSubmit="OnSubmit">
+        <DataAnnotationsValidator />
+        @*<InputText type="text" class="sign-input form-control" placeholder="Username" @bind-Value="User.UserName" />
+            <ValidationMessage For="@(() => User.UserName)"></ValidationMessage>*@
+        <div class="sign-validation">
+            <ValidationInput placeholder="Username"
+                             @bind-Value="@User.UserName"
+                             Error="@GetError(() => User.UserName)"></ValidationInput>
+        </div>
+        @*<InputText type="password" class="sign-input form-control" placeholder="Password" @bind-Value="User.Password"/>
+            <ValidationMessage For="@(() => User.Password)"></ValidationMessage>*@
+        <div class="sign-validation">
+            <ValidationInput type="password"
+                             placeholder="Password"
+                             @bind-Value="@User.Password"
+                             Error="@GetError(() => User.Password)"></ValidationInput>
+        </div>
         <button class="sign-button btn btn-primary" type="submit">Sign in</button>
     </EditForm>
     <div class="signup">
-        <a href="/signup">Sign up</a>
+        @*<a href="@(User.UserName =! null ? "/signup?username=" + User.UserName : "/signup")">Sign up</a>*@
+        @*<a href="@(User.UserName =! null ? "/signup/" + User.UserName : "/signup")">Sign up</a>*@
 
     </div>
 </div>
 
 @code {
-    private string Day { get; } = DateTime.Now.DayOfWeek.ToString();
 
-    private string Username { get; set; } = "Boyet";
-
-    private void HandleUserNameChanged(ChangeEventArgs eventArgs)
-    {
-        Username = eventArgs.Value.ToString();
-    }
-
-    private void HandleUserNameValueChanged(string value)
-    {
-        Username = value;
-    }
 }

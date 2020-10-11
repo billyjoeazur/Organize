@@ -1,8 +1,0 @@
-﻿@inherits ValidationInputBase
-<div class="validation-container">
-    <input class="validation-input form-control" @onchange="(async (eventArgs) => await ValueChangedCallback.InvokeAsync(eventArgs.Value.ToString()))" value="@Value">
-    <div class="val-tooltip">
-        !
-        <span class="val-tooltiptext"></span>
-    </div>
-</div>

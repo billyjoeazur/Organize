@@ -5,6 +5,30 @@ html, body {
 }
 
 
+.main {
+    padding-top: 54px;
+    height: 100%;
+}
+
+/*NavBar*/
+.navbar {
+    background: #00B0F0;
+    color: white;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.navbar-light .navbar-brand {
+    color: white;
+}
+
+.active-nav > button {
+    background: green;
+}
+
+
 
 .invalid {
     outline: 1px solid red;
@@ -12,6 +36,7 @@ html, body {
 
 .validation-message {
     color: red;
+    position:absolute;
 }
 
 #blazor-error-ui {
