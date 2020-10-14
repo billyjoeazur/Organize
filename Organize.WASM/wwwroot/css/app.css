@@ -1,59 +1,63 @@
-﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
-
+﻿@import url("open-iconic/font/css/open-iconic-bootstrap.min.css");
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
 
 .main {
-    padding-top: 54px;
-    height: 100%;
-}
+  padding-top: 54px;
+  height: 100%; }
+
+.primary-background {
+  background: #00B0F0; }
+
+.secondary-background {
+  background: #C0A300; }
+
+.tertiary-background {
+  background: #8A00C0; }
+
+.primary-border-color {
+  border-color: #00B0F0; }
+
+.secondary-border-color {
+  border-color: #C0A300; }
+
+.tertiary-border-color {
+  border-color: #8A00C0; }
 
 /*NavBar*/
 .navbar {
-    background: #00B0F0;
-    color: white;
-}
+  background: #00B0F0;
+  color: white; }
 
 .navbar-brand {
-    color: white;
-}
+  color: white; }
 
 .navbar-light .navbar-brand {
-    color: white;
-}
+  color: white; }
 
 .active-nav > button {
-    background: green;
-}
-
-
+  background: green; }
 
 .invalid {
-    outline: 1px solid red;
-}
+  outline: 1px solid red; }
 
 .validation-message {
-    color: red;
-    position:absolute;
-}
+  color: red;
+  position: absolute; }
 
 #blazor-error-ui {
-    background: lightyellow;
-    bottom: 0;
-    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
-    display: none;
-    left: 0;
-    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-}
+  background: lightyellow;
+  bottom: 0;
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+  display: none;
+  left: 0;
+  padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+  position: fixed;
+  width: 100%;
+  z-index: 1000; }
 
 #blazor-error-ui .dismiss {
-    cursor: pointer;
-    position: absolute;
-    right: 0.75rem;
-    top: 0.5rem;
-}
+  cursor: pointer;
+  position: absolute;
+  right: 0.75rem;
+  top: 0.5rem; }
