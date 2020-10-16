@@ -1,0 +1,12 @@
+﻿<button class="orga-button mb-3" @onclick="AddNewChildToParentAsync">Add</button>
+
+<ul class="list-group">
+    @foreach (var childItem in ParentItem.ChildItems)
+    {
+        <li class="list-group-item">
+            @*<input class="form-control" type="text" value="@childItem.Title"
+                   @onchange="@((eventArgs) => OnChildItemTitleChanged(childItem,eventArgs))" />*@
+            <input class="form-control" type="text" @bind-value="childItem.Title" />
+        </li>
+    }
+</ul>

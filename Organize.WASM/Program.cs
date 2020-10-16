@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Organize.Shared.Contracts;
 using Organize.Business;
 using Organize.TestFake;
+using Organize.WASM.ItemEdit;
 
 namespace Organize.WASM
 {
@@ -24,8 +25,11 @@ namespace Organize.WASM
 
 			//builder.Services.AddSingleton<IUserManager, UserManager>();
 			builder.Services.AddScoped<IUserManager, UserManagerFake>();
+			builder.Services.AddScoped<IUserItemManager, UserItemManager>();
 
 			builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+			builder.Services.AddScoped<ItemEditService>();
 
 			var host = builder.Build();
 

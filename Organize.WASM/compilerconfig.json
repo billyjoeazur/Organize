@@ -18,5 +18,17 @@
   {
     "outputFile": "wwwroot/css/app.css",
     "inputFile": "wwwroot/css/app.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/components/ItemOverview.css",
+    "inputFile": "wwwroot/css/components/ItemOverview.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/components/itemsOverview.css",
+    "inputFile": "wwwroot/css/components/itemsOverview.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/components/itemEdit.css",
+    "inputFile": "wwwroot/css/components/itemEdit.scss"
   }
 ]
