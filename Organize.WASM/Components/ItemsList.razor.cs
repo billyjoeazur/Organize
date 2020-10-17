@@ -18,19 +18,22 @@ namespace Organize.WASM.Components
 		private ICurrentUserService CurrentUserService { get; set; }
 
 		[Inject]
+		private IUserItemManager userItemManager { get; set; }
+
+		[Inject]
 		private ItemEditService ItemEditService { get; set; }
 
 		protected ObservableCollection<BaseItem> UserItems { get; set; } = new ObservableCollection<BaseItem>();
 
-		protected override void OnInitialized()
+
+		protected override async Task OnInitializedAsync()
 		{
-			base.OnInitialized();
+			await base.OnInitializedAsync();
+
+			await userItemManager.RetrieveAllUserItemsOfUserAndSetToUserAsync(CurrentUserService.CurrentUser);
 
 			UserItems = CurrentUserService.CurrentUser.UserItems;
 			UserItems.CollectionChanged += HandleUserItemsCollectionChanged;
-			Console.WriteLine(UserItems.Count);
-			Console.WriteLine(UserItems);
-			Console.WriteLine(JsonSerializer.Serialize(UserItems));
 		}
 
 		private void HandleUserItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

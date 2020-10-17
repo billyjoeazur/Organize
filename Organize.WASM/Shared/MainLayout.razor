@@ -3,7 +3,14 @@
 <nav class="navbar navbar-light justify-content-between fixed-top">
     <a class="navbar-brand" href="/items">
         <img src="/images/blazor.png" width="30" height="30" class="d-inline-block align-top">
-        Hello @CurrentUserService.CurrentUser
+        @if (UseShortNavText)
+	{
+		 @:Hello
+	}
+        else
+        {
+            @:Hello @CurrentUserService.CurrentUser! Organize your life right
+        }
     </a>
     <form class="form-inline">
         <NavLink href="settings" ActiveClass="active-nav">
