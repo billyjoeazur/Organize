@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Principal;
 using System.Text;
 
 namespace Organize.Shared.Entities
@@ -28,7 +29,15 @@ namespace Organize.Shared.Entities
 
 		public GenderTypeEnum GenderType { get; set; }
 
-		public ObservableCollection<BaseItem> UserItems { get; set; }
+		public bool IsUserItemsPropertyLoaded { get; set; } = false;
+
+		public ObservableCollection<BaseItem> UserItems {
+			get => _userItems;
+			set => SetProperty(ref _userItems, value); 
+		}
+		private ObservableCollection<BaseItem> _userItems = new ObservableCollection<BaseItem>();
+
+		public string Token { get; set; }
 
 		public override string ToString()
 		{

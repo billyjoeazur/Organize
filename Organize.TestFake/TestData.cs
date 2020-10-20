@@ -13,9 +13,10 @@ namespace Organize.TestFake
 		public static User TestUser { get; private set; }
 
         public static void CreateTestUser(
-            IUserItemManager userItemManager = null
-            //IUserManager userManager = null)
-            )
+            IUserItemManager userItemManager = null,
+			IUserManager userManager = null
+			)
+            
         {
             var user = new User();
             user.Id = 123;
@@ -26,10 +27,10 @@ namespace Organize.TestFake
             user.GenderType = GenderTypeEnum.Male;
             user.UserItems = new ObservableCollection<BaseItem>();
 
-			//if (userManager != null)
-			//{
-			//    userManager.InsertUserAsync(user);
-			//}
+			if (userManager != null)
+			{
+				userManager.InsertUserAsync(user);
+			}
 
 			TextItem textItem = null;
 			if (userItemManager != null)
@@ -106,8 +107,8 @@ namespace Organize.TestFake
 
             childItem.ParentId = parentItem.Id;
             childItem.Id = 4;
-            //childItem.ItemTypeEnum = ItemTypeEnum.Child;
-            childItem.Position = 1;
+			childItem.ItemTypeEnum = ItemTypeEnum.Child;
+			childItem.Position = 1;
             childItem.Title = "Cut";
 
             TestUser = user;

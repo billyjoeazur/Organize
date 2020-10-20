@@ -1,6 +1,8 @@
 ﻿//using Blazored.Modal;
 //using Blazored.Modal.Services;
-//using GeneralUi.BusyOverlay;
+using Blazored.Modal;
+using Blazored.Modal.Services;
+using GeneralUi.BusyOverlay;
 using GeneralUi.DropdownControl;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.WebUtilities;
@@ -8,6 +10,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Primitives;
 using Organize.Shared.Contracts;
 using Organize.Shared.Enums;
+using Organize.WASM.Components;
 //using Organize.WASM.Components;
 using System;
 using System.Collections.Generic;
@@ -21,14 +24,14 @@ namespace Organize.WASM.Pages
 		[Inject]
 		private NavigationManager NavigationManager { get; set; }
 
-		//[Inject]
-		//private BusyOverlayService BusyOverlayService { get; set; }
+		[Inject]
+		private BusyOverlayService BusyOverlayService { get; set; }
 
 		[Inject]
 		private IUserManager UserManager { get; set; }
 
-		//[Inject]
-		//private IModalService ModalService { get; set; }
+		[Inject]
+		private IModalService ModalService { get; set; }
 
 		protected IList<DropdownItem<GenderTypeEnum>> GenderTypeDropDownItems { get; } = new List<DropdownItem<GenderTypeEnum>>();
 
@@ -81,8 +84,7 @@ namespace Organize.WASM.Pages
 			//{
 			//	BusyOverlayService.SetBusyState(BusyEnum.Busy);
 			//	User.GenderType = SelectedGenderTypeDropDownItem.ItemObject;
-			await UserManager.InsertUserAsync(User);
-			//	NavigationManager.NavigateTo("signin");
+
 			//}
 			//catch (Exception e)
 			//{
@@ -94,6 +96,24 @@ namespace Organize.WASM.Pages
 			//{
 			//	BusyOverlayService.SetBusyState(BusyEnum.NotBusy);
 			//}
+
+			try
+			{
+				BusyOverlayService.SetBusyState(BusyEnum.Busy);
+				await UserManager.InsertUserAsync(User);
+				NavigationManager.NavigateTo("signin");
+			}
+
+			catch(Exception e)
+			{
+				var parameters = new ModalParameters();
+				parameters.Add(nameof(ModalMessage.Message), e.Message);
+				ModalService.Show<ModalMessage>("Error", parameters);
+			}
+			finally
+			{
+				BusyOverlayService.SetBusyState(BusyEnum.NotBusy);
+			}
 		}
 	}
 }

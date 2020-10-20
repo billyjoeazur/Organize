@@ -9,32 +9,29 @@ namespace Organize.Business
 {
 	public class UserManager : IUserManager
 	{
-        //private readonly IUserDataAccess _userDataAccess;
+		private readonly IUserDataAccess _userDataAccess;
 
-        //public UserManager(IUserDataAccess userDataAccess)
-        //{
-        //    _userDataAccess = userDataAccess;
-        //}
+		public UserManager(IUserDataAccess userDataAccess)
+		{
+			_userDataAccess = userDataAccess;
+		}
 
-        public async Task<User> TrySignInAndGetUserAsync(User user)
+		public async Task<User> TrySignInAndGetUserAsync(User user)
         {
-            //return await _userDataAccess.AuthenticateAndGetUserAsync(user);
-            //await Task.Delay(10000);
-            Console.WriteLine("hello from usermanger");
-            return await Task.FromResult(new User());
-        }
+			return await _userDataAccess.AuthenticateAndGetUserAsync(user);
+		}
 
         public async Task InsertUserAsync(User user)
         {
-            //var isUserAlreadyAvailable = await _userDataAccess.IsUserWithNameAvailableAsync(user);
-            //if (isUserAlreadyAvailable)
-            //{
-            //    throw new Exception("Username already exists");
-            //}
+			var isUserAlreadyAvailable = await _userDataAccess.IsUserWithNameAvailableAsync(user);
+			if (isUserAlreadyAvailable)
+			{
+				throw new Exception("Username already exists");
+			}
 
-            //await _userDataAccess.InsertUserAsync(user);
+			await _userDataAccess.InsertUserAsync(user);
 
-            await Task.FromResult(true);
+			//await Task.FromResult(true);
         }
     }
 }

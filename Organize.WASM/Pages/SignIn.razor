@@ -1,5 +1,6 @@
 ﻿@page "/signin"
 @inherits SignInBase
+@layout UnAuthLayout
 
 <div class="sign-form">
     <p class="welcome-text">Hello @(string.IsNullOrEmpty(User.UserName) ? "User" : User.UserName) - Today is @Day!</p>
@@ -24,8 +25,8 @@
         <button class="sign-button btn btn-primary" type="submit">Sign in</button>
     </EditForm>
     <div class="signup">
-        @*<a href="@(User.UserName =! null ? "/signup?username=" + User.UserName : "/signup")">Sign up</a>*@
-        @*<a href="@(User.UserName =! null ? "/signup/" + User.UserName : "/signup")">Sign up</a>*@
+        @*<a href="@(User.UserName != null ? "/signup?username=" + User.UserName : "/signup")">Sign up</a>*@
+        <a href="@(User.UserName != null ? "/signup?username=" + User.UserName : "/signup")">Sign up</a>
 
     </div>
 </div>

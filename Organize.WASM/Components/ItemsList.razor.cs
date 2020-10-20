@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -30,10 +31,25 @@ namespace Organize.WASM.Components
 		{
 			await base.OnInitializedAsync();
 
-			await userItemManager.RetrieveAllUserItemsOfUserAndSetToUserAsync(CurrentUserService.CurrentUser);
-
 			UserItems = CurrentUserService.CurrentUser.UserItems;
 			UserItems.CollectionChanged += HandleUserItemsCollectionChanged;
+			CurrentUserService.CurrentUser.PropertyChanged += HandleUserPropertyChanged;
+		}
+
+		private void HandleUserPropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			if (e.PropertyName.Equals(nameof(User.UserItems)))
+			{
+				if (UserItems != null)
+				{
+					UserItems.CollectionChanged -= HandleUserItemsCollectionChanged;
+				}
+
+				UserItems = CurrentUserService.CurrentUser.UserItems;
+				UserItems.CollectionChanged += HandleUserItemsCollectionChanged;
+
+				StateHasChanged();
+			}
 		}
 
 		private void HandleUserItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

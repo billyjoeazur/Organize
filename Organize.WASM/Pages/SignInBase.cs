@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Modal;
+using Blazored.Modal.Services;
+using GeneralUi.BusyOverlay;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Organize.Business;
 using Organize.Shared.Contracts;
 using Organize.Shared.Entities;
+using Organize.WASM.Components;
+using Organize.WASM.OrganizeAuthenticationStateProvider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +27,17 @@ namespace Organize.WASM.Pages
 		[Inject]
 		private IUserManager UserManager { get; set; }
 
+		[Inject]
+		private IModalService ModalService { get; set; }
 
+		[Inject]
+		private BusyOverlayService BusyOverlayService { get; set; }
+
+		[Inject]
+		private ICurrentUserService CurrentUserService { get; set; }
+
+		[Inject]
+		private IAuthenticationStateProvider authenticationStateProvider { get; set; }
 
 		protected async void OnSubmit()
 		{
@@ -31,10 +46,33 @@ namespace Organize.WASM.Pages
 				return;
 			}
 
-			var foundUser = await UserManager.TrySignInAndGetUserAsync(User);
-			if (foundUser != null)
+			try
 			{
-				NavigationManager.NavigateTo("items");
+				BusyOverlayService.SetBusyState(BusyEnum.Busy);
+				var foundUser = await UserManager.TrySignInAndGetUserAsync(User);
+
+				if (foundUser != null)
+				{
+					authenticationStateProvider.SetAuthenticatedState(foundUser);
+					CurrentUserService.CurrentUser = foundUser;
+					NavigationManager.NavigateTo("items");
+				}
+				else
+				{
+					var parameters = new ModalParameters();
+					parameters.Add(nameof(ModalMessage.Message), "User not found");
+					ModalService.Show<ModalMessage>("Error", parameters);
+				}
+			}
+			catch(Exception e)
+			{
+				var parameters = new ModalParameters();
+				parameters.Add(nameof(ModalMessage.Message), e.Message);
+				ModalService.Show<ModalMessage>("Error", parameters);
+			}
+			finally
+			{
+				BusyOverlayService.SetBusyState(BusyEnum.NotBusy);
 			}
 		}
 
