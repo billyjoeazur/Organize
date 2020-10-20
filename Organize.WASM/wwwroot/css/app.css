@@ -451,6 +451,27 @@ html, body {
   padding-top: 54px;
   height: 100%; }
 
+.crossed-out {
+  text-decoration: line-through; }
+
+.primary-background-disabled {
+  background: #57d2ff; }
+
+.secondary-background-disabled {
+  background: #ffde27; }
+
+.tertiary-background-disabled {
+  background: #c227ff; }
+
+.primary-border-color-disabled {
+  border-color: #57d2ff; }
+
+.secondary-border-color-disabled {
+  border-color: #ffde27; }
+
+.tertiary-border-color-disabled {
+  border-color: #c227ff; }
+
 .orga-button {
   background-color: #00B0F0;
   color: white; }

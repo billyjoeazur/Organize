@@ -1,8 +1,8 @@
 ﻿<div class="item-edit-info">
     <div class="item-edit-info-text">Type: @Item.ItemTypeEnum.ToString()</div>
-    @*<ObservableCollectionObserver TProp="BaseItem" Collection="CurrentUserService.CurrentUser.UserItems" ObserveChildren="false">*@
-    <div class="item-edit-info-count">@Item.Position/@TotalNumber</div>
-    @*</ObservableCollectionObserver>*@
+    <ObservableCollectionObserver TProp="BaseItem" Collection="CurrentUserService.CurrentUser.UserItems" ObserveChildren="false">
+    <div class="item-edit-info-count">@Item.Position/@CurrentUserService.CurrentUser.UserItems.Count</div>
+    </ObservableCollectionObserver>
 </div>
 
 <label for="title">Title</label>

@@ -82,7 +82,7 @@ namespace Organize.WASM.Components
                     Item = userItem;
 					Item.PropertyChanged += HandleItemPropertyChanged;
 					NavigationManager.LocationChanged += HandleLocationChanged;
-					//TotalNumber = CurrentUserService.CurrentUser.UserItems.Count;
+					TotalNumber = CurrentUserService.CurrentUser.UserItems.Count;
 					StateHasChanged();
 				}
             }

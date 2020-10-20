@@ -1,6 +1,7 @@
 <Blazored.Modal.CascadingBlazoredModal>
     <CascadingAuthenticationState>
-        <Router AppAssembly="@typeof(Program).Assembly">
+        <Router AppAssembly="@typeof(Program).Assembly"
+                AdditionalAssemblies="new[] { typeof(GeneralUi.About).Assembly}">
             <Found Context="routeData">
                 <GeneralUi.BusyOverlay.BusyOverlay>
                     <div class="spinner-border" role="status">

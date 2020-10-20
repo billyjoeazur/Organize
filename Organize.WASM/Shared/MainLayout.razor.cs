@@ -70,7 +70,9 @@ namespace Organize.WASM.Shared
 			CheckUseShortNavText(width);
 
 			_dotNetReference = DotNetObjectReference.Create(this);
-			await JSRuntime.InvokeVoidAsync("blazorResize.registerReferenceForResizeEvent", _dotNetReference);
+			await JSRuntime.InvokeVoidAsync("blazorResize.registerReferenceForResizeEvent"
+				,nameof(MainLayout)
+				, _dotNetReference);
 		}
 
 		[JSInvokable]
@@ -95,8 +97,9 @@ namespace Organize.WASM.Shared
 			}
 		}
 
-		public void Dispose()
+		public async void Dispose()
 		{
+			await JSRuntime.InvokeVoidAsync("blazorResize.unRegister", nameof(MainLayout));
 			_dotNetReference?.Dispose();
 		}
 	}
