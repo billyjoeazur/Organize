@@ -4,9 +4,9 @@
     @foreach (var childItem in ParentItem.ChildItems)
     {
         <li class="list-group-item">
-            @*<input class="form-control" type="text" value="@childItem.Title"
-                   @onchange="@((eventArgs) => OnChildItemTitleChanged(childItem,eventArgs))" />*@
-            <input class="form-control" type="text" @bind-value="childItem.Title" />
+            <input class="form-control" type="text" value="@childItem.Title"
+                   @onchange="@((eventArgs) => OnChildItemTitleChanged(childItem,eventArgs))" />
+            @*<input class="form-control" type="text" @bind-value="childItem.Title" />*@
         </li>
     }
 </ul>

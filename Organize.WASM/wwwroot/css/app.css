@@ -445,7 +445,8 @@ input[type="button"].btn-block {
   width: 100%; }
 
 html, body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  height: 100%; }
 
 .main {
   padding-top: 54px;

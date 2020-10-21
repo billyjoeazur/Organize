@@ -23,10 +23,10 @@ namespace Organize.WASM.Components
             await UserItemManager.CreateNewChildItemAndAddItToParentItemAsync(ParentItem);
         }
 
-        //private async void OnChildItemTitleChanged(ChildItem childItem, ChangeEventArgs eventArgs)
-        //{
-        //    childItem.Title = eventArgs.Value.ToString();
-        //    await UserItemManager.UpdateAsync(childItem);
-        //}
-    }
+		private async void OnChildItemTitleChanged(ChildItem childItem, ChangeEventArgs eventArgs)
+		{
+			childItem.Title = eventArgs.Value.ToString();
+			await UserItemManager.UpdateAsync(childItem);
+		}
+	}
 }

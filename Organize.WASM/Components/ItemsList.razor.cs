@@ -22,6 +22,9 @@ namespace Organize.WASM.Components
 		private IUserItemManager userItemManager { get; set; }
 
 		[Inject]
+		private NavigationManager NavigationManager { get; set; }
+
+		[Inject]
 		private ItemEditService ItemEditService { get; set; }
 
 		protected ObservableCollection<BaseItem> UserItems { get; set; } = new ObservableCollection<BaseItem>();
@@ -59,7 +62,8 @@ namespace Organize.WASM.Components
 
 		private void OnBackgroundClicked()
 		{
-			ItemEditService.EditItem = null;
+			//ItemEditService.EditItem = null;
+			NavigationManager.NavigateTo("/items");
 		}
 
 		public void Dispose()

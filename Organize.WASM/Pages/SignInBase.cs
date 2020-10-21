@@ -39,6 +39,8 @@ namespace Organize.WASM.Pages
 		[Inject]
 		private IAuthenticationStateProvider authenticationStateProvider { get; set; }
 
+		public bool ShowPassword { get; set; }
+
 		protected async void OnSubmit()
 		{
 			if (!EditContext.Validate())
